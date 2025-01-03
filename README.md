@@ -1,2 +1,2 @@
-# webpack-template
-A template using webpack. This comes with some basic configuration.
+# Todo list
+A Simple todo list app

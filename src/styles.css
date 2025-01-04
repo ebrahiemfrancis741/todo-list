@@ -28,17 +28,27 @@ header{
 main{
   /* background-color: #021526; */
   padding: 32px;
-  >button.add-project-btn{
-    width: 400px;
-    height: 600px;
-    background-color: #021526;
-    border: 4px solid #6EACDA;
-    border-radius: 8px;
 
-    &:hover{
+  >div.projects-container{
+
+    >h2{
+      color: #E2E2B6;
+      margin-bottom: 24px;
+    }
+
+    >button.add-project-btn{
+      width: 400px;
+      height: 600px;
       background-color: rgb(24, 24, 24);
+      border: 4px solid #6EACDA;
+      border-radius: 8px;
+  
+      &:hover{
+        background-color: #021526;
+      }
     }
   }
+
 }
 
 body{

@@ -10,9 +10,21 @@
     <h1>Todo List</h1>
   </header>
   <main>
-    <button class="add-project-btn">
-      <img src="./icons/add.svg">
-    </button>
+    <div class="dialog-container">
+      <dialog id="addProjectDialog">
+        <h2></h2>
+        <form>
+          <input type="text" id="projectTitle" placeholder="title" name="projectTitle">
+          <button type="button" id="btnProjectCreate">Create</button>
+        </form>
+      </dialog>
+    </div>
+    <div class="projects-container">
+      <h2>Projects</h2>
+      <button class="add-project-btn">
+        <img src="./icons/add.svg">
+      </button>
+    </div>
   </main>
 </body>
 </html>

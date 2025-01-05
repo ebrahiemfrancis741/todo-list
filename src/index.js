@@ -1,5 +1,5 @@
 import "./styles.css"
 import { TodoItem } from "./todoItem";
+import { setupEventHandlers } from "./uiManager";
 
-let x = new TodoItem("tit", "desc", "due", "pri", "note", "check", false);
-console.log(x);
+setupEventHandlers();

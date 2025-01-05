@@ -8,6 +8,13 @@ class Project{
     this.#todoList = todoList;
   }
 
+  toJSON(){
+    return {
+      title: this.#title,
+      todoList: this.#todoList
+    };
+  }
+
   get title(){
     return this.#title;
   }
@@ -24,3 +31,5 @@ class Project{
     this.#todoList = todoList;
   }
 }
+
+export {Project};

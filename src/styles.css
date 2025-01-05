@@ -16,12 +16,23 @@
   font-family: "openSans";
 }
 
+body{
+  &.dialog-open{
+    opacity: 0.2;
+  }
+
+  /* &.dialog-close{
+    opacity: 1;
+  } */
+}
+
 header{
   background-color: #03346E;
 
   >h1{
     padding: 4px 4px 4px 4px;
-    color: black;
+    font-weight: 500;
+    color: white;
   }
 }
 
@@ -29,11 +40,59 @@ main{
   /* background-color: #021526; */
   padding: 32px;
 
+  >div.dialog-container{
+    >dialog{
+      position: fixed;
+      top: 20%;
+      left: 40%;
+      /* padding: 8px; */
+      border: 0;
+      &#addProjectDialog{
+        width: 300px;
+        height: 200px;
+        
+        >h2{
+          margin-bottom: 16px;
+          font-weight: 500;
+          border-bottom: 1px solid #03346E;
+          padding: 4px;
+          background-color: #03346E;
+          color: white;
+        }
+
+        >form{
+          padding: 8px;
+          >input{
+            padding: 8px;
+            width: 90%;
+            margin-bottom: 16px;
+            border: 1px solid rgb(24, 24, 24);
+            border-radius: 4px;
+          }
+
+          >div{
+            >button{
+              border: 1px solid rgb(24, 24, 24);
+              padding: 4px;
+              border-radius: 4px;
+
+              &:hover{
+                background-color: #03346E;
+                color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   >div.projects-container{
 
     >h2{
-      color: #E2E2B6;
+      color: white;
       margin-bottom: 24px;
+      font-weight: 500;
     }
 
     >button.add-project-btn{

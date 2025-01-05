@@ -8,7 +8,7 @@
   margin: 0;
   padding: 0;
   border: 0;
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 :root{
@@ -39,6 +39,12 @@ header{
 main{
   /* background-color: #021526; */
   padding: 32px;
+
+  >h2{
+    color: white;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
 
   >div.dialog-container{
     >dialog{
@@ -88,11 +94,22 @@ main{
   }
 
   >div.projects-container{
+    display: flex;
+    gap: 24px;
 
-    >h2{
-      color: white;
-      margin-bottom: 24px;
-      font-weight: 500;
+    >div.project{
+      width: 400px;
+      height: 600px;
+      border: 4px solid black;
+      border-radius: 8px;
+      padding: 8px;
+
+      >div.project-todo-list{
+
+        >div.todo{
+
+        }
+      }
     }
 
     >button.add-project-btn{

@@ -48,4 +48,34 @@ function btnProjectCreate(){
   });
 }
 
-export {setupEventHandlers};
+function displayProjects(){
+  let projectsContainer = document.querySelector(".projects-container");
+  let addProjectBtn = document.querySelector(".add-project-btn");
+  let project, projectToDoList, projectTitle, projectObj;
+  
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+
+    // console.log(`${value}`);
+    projectObj = JSON.parse(`${value}`);
+    // console.log(projectObj.title);
+
+    project = document.createElement("div");
+    project.classList.add("project");
+    // project.setAttribute("id", project.title);
+    project.id = projectObj.title;
+    addProjectBtn.before(project);
+
+    projectTitle = document.createElement("h3");
+    projectTitle.textContent = projectObj.title;
+    project.appendChild(projectTitle);
+
+    projectToDoList = document.createElement("div");
+    projectToDoList.classList.add("project-todo-list");
+    project.appendChild(projectToDoList);
+}
+
+}
+
+export {setupEventHandlers, displayProjects};

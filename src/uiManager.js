@@ -42,40 +42,41 @@ function btnProjectCreate(){
     let stringObject = JSON.stringify(newProject);
     console.log(stringObject);
     localStorage.setItem(newProject.title, stringObject);
-    
+    addProjectToContainer(newProject);
+
     body.classList.toggle("dialog-open");
     addProjectDialog.close();
   });
 }
 
 function displayProjects(){
-  let projectsContainer = document.querySelector(".projects-container");
-  let addProjectBtn = document.querySelector(".add-project-btn");
-  let project, projectToDoList, projectTitle, projectObj;
-  
+  let projectObj;
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     const value = localStorage.getItem(key);
 
-    // console.log(`${value}`);
     projectObj = JSON.parse(`${value}`);
-    // console.log(projectObj.title);
-
-    project = document.createElement("div");
-    project.classList.add("project");
-    // project.setAttribute("id", project.title);
-    project.id = projectObj.title;
-    addProjectBtn.before(project);
-
-    projectTitle = document.createElement("h3");
-    projectTitle.textContent = projectObj.title;
-    project.appendChild(projectTitle);
-
-    projectToDoList = document.createElement("div");
-    projectToDoList.classList.add("project-todo-list");
-    project.appendChild(projectToDoList);
+    addProjectToContainer(projectObj);
 }
 
+}
+
+function addProjectToContainer(projectObj){
+  let projectsContainer = document.querySelector(".projects-container");
+  let project, projectToDoList, projectTitle;
+
+  project = document.createElement("div");
+  project.classList.add("project");
+  project.id = projectObj.title;
+  projectsContainer.appendChild(project);
+
+  projectTitle = document.createElement("h3");
+  projectTitle.textContent = projectObj.title;
+  project.appendChild(projectTitle);
+
+  projectToDoList = document.createElement("div");
+  projectToDoList.classList.add("project-todo-list");
+  project.appendChild(projectToDoList);
 }
 
 export {setupEventHandlers, displayProjects};

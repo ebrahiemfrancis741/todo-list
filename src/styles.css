@@ -96,6 +96,12 @@ main{
   >div.projects-container{
     display: flex;
     gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
+    columns: 8px;
+    row-gap: 32px; */
 
     >div.project{
       width: 400px;

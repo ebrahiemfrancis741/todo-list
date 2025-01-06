@@ -1,4 +1,6 @@
 import { Project } from "./project";
+import { appState } from "./appState";
+import { TodoItem } from "./todoItem";
 
 function setupEventHandlers(){
   
@@ -6,6 +8,7 @@ function setupEventHandlers(){
   btnProjectClose();
   btnProjectCreate();
   btnTodoCloseEventHandler();
+  btnTodoCreateEventHandler();
 }
 
 function btnProjectDialogEventHandler(){
@@ -87,7 +90,10 @@ function addProjectToContainer(projectObj){
   btnAddTodo.classList.add(".add-todo");
 
   btnAddTodo.addEventListener("click", (e)=>{
-    console.log(e.target.id);
+    // store which project is selected in appState
+    appState.project = JSON.parse(localStorage.getItem(e.target.id));
+    console.log(appState.project);
+
     body.classList.toggle("dialog-open");
     let addTodoDialog = document.querySelector("#addTodoDialog");
     addTodoDialog.showModal();
@@ -100,7 +106,31 @@ function addProjectToContainer(projectObj){
 
 // }
 
+function btnTodoCreateEventHandler(){
+  let body = document.querySelector("body");
+  let btnTodoCreate = document.querySelector("#btnTodoCreate");
+  let addTodoDialog = document.querySelector("#addTodoDialog");
 
+  btnTodoCreate.addEventListener("click", (e)=>{
+    let todoTitle = document.querySelector("#todoTitle");
+    let todoDescription = document.querySelector("#todoDescription");
+    let todoDueDate = document.querySelector("#todoDueDate");
+    console.log(todoDueDate.value);
+    let todoPriority = document.querySelector("#todoPriority");
+    let todoNotes = document.querySelector("#todoNotes");
+    let project = appState.project;
+    console.log(project);
+    let todoItem = new TodoItem(
+      todoTitle.value, todoDescription.value, todoDueDate.value,
+      todoPriority.value, todoNotes.value
+    );
+    project.todoList.push(todoItem);
+    localStorage.setItem(project.title, JSON.stringify(project));
+    body.classList.toggle("dialog-open");
+    addTodoDialog.close();
+  });
+
+}
 
 function btnTodoCloseEventHandler(){
   let body = document.querySelector("body");

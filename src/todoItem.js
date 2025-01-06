@@ -17,6 +17,17 @@ class TodoItem{
     this.#complete = complete;
   }
 
+  toJSON(){
+    return {
+      title: this.#title,
+      todoList: this.#description,
+      dueDate: this.dueDate,
+      priority: this.#priority,
+      notes: this.#notes,
+      complete: this.complete
+    };
+  }
+
   get title(){
     return this.#title;
   }

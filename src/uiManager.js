@@ -69,7 +69,7 @@ function addProjectToContainer(projectObj){
 
   project = document.createElement("div");
   project.classList.add("project");
-  project.id = projectObj.title;
+  // project.id = projectObj.title;
   projectsContainer.appendChild(project);
 
   projectTitle = document.createElement("h3");
@@ -82,11 +82,12 @@ function addProjectToContainer(projectObj){
 
   //add btn that shows a dialog for creating a todo item
   let btnAddTodo = document.createElement("button");
+  btnAddTodo.id = projectObj.title;
   btnAddTodo.textContent = "Add a task";
   btnAddTodo.classList.add(".add-todo");
 
   btnAddTodo.addEventListener("click", (e)=>{
-    console.log(e.target);
+    console.log(e.target.id);
     body.classList.toggle("dialog-open");
     let addTodoDialog = document.querySelector("#addTodoDialog");
     addTodoDialog.showModal();
@@ -98,6 +99,8 @@ function addProjectToContainer(projectObj){
 // function btnAddTodoEventHandler(projectObj){
 
 // }
+
+
 
 function btnTodoCloseEventHandler(){
   let body = document.querySelector("body");

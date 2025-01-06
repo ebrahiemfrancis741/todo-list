@@ -86,6 +86,67 @@ main{
           }
         }
       }
+
+      &#addTodoDialog{
+        width: 500px;
+        height: 600px;
+
+        >h2{
+          margin-bottom: 16px;
+          font-weight: 500;
+          border-bottom: 1px solid #03346E;
+          padding: 4px;
+          background-color: #03346E;
+          color: white;
+        }
+
+        >form{
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          >input{
+            padding: 8px;
+            width: 100%;
+            /* margin-bottom: 16px; */
+            border: 1px solid rgb(24, 24, 24);
+            border-radius: 4px;
+          }
+
+          >div.priority-container{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            >select#todoPriority{
+              border: 1px solid black;
+              padding: 8px;
+              /* font-size: 20px; */
+            }
+          }
+          
+          >div{
+            >button{
+              border: 1px solid rgb(24, 24, 24);
+              padding: 4px;
+              border-radius: 4px;
+
+              &:hover{
+                background-color: #03346E;
+                color: white;
+              }
+            }
+          }
+
+          >textarea{
+            padding: 8px;
+            border: 1px solid black;
+            resize: none;
+          }
+
+        }
+        
+      }
     }
   }
 

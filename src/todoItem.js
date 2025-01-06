@@ -6,16 +6,14 @@ class TodoItem{
   #dueDate;
   #priority;
   #notes;
-  #checklist;
   #complete;
 
-  constructor(title, description, dueDate, priority, notes, checklist, complete){
+  constructor(title, description, dueDate, priority, notes, complete){
     this.#title = title;
     this.#description = description;
     this.#dueDate = dueDate; // date object?
     this.#priority = priority;
     this.#notes = notes;
-    this.#checklist = checklist;
     this.#complete = complete;
   }
 
@@ -37,10 +35,6 @@ class TodoItem{
 
   get notes(){
     return this.#notes;
-  }
-
-  get checklist(){
-    return this.#checklist;
   }
 
   get complete(){
@@ -65,10 +59,6 @@ class TodoItem{
 
   set notes(notes){
     this.#notes = notes;
-  }
-
-  set checklist(checklist){
-    this.#checklist = checklist;
   }
 
   set complete(complete){

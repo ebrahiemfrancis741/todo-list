@@ -5,6 +5,7 @@ function setupEventHandlers(){
   btnProjectDialogEventHandler();
   btnProjectClose();
   btnProjectCreate();
+  btnTodoCloseEventHandler();
 }
 
 function btnProjectDialogEventHandler(){
@@ -62,6 +63,7 @@ function displayProjects(){
 }
 
 function addProjectToContainer(projectObj){
+  let body = document.querySelector("body");
   let projectsContainer = document.querySelector(".projects-container");
   let project, projectToDoList, projectTitle;
 
@@ -77,6 +79,34 @@ function addProjectToContainer(projectObj){
   projectToDoList = document.createElement("div");
   projectToDoList.classList.add("project-todo-list");
   project.appendChild(projectToDoList);
+
+  //add btn that shows a dialog for creating a todo item
+  let btnAddTodo = document.createElement("button");
+  btnAddTodo.textContent = "Add a task";
+  btnAddTodo.classList.add(".add-todo");
+
+  btnAddTodo.addEventListener("click", (e)=>{
+    console.log(e.target);
+    body.classList.toggle("dialog-open");
+    let addTodoDialog = document.querySelector("#addTodoDialog");
+    addTodoDialog.showModal();
+  });
+
+  projectToDoList.appendChild(btnAddTodo);
+}
+
+// function btnAddTodoEventHandler(projectObj){
+
+// }
+
+function btnTodoCloseEventHandler(){
+  let body = document.querySelector("body");
+  let addTodoDialog = document.querySelector("#addTodoDialog");
+  let btnTodoClose = document.querySelector("#btnTodoClose");
+  btnTodoClose.addEventListener("click", ()=>{
+    addTodoDialog.close();
+    body.classList.toggle("dialog-open");
+  });
 }
 
 export {setupEventHandlers, displayProjects};

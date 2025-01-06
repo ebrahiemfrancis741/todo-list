@@ -21,6 +21,26 @@
           </div>
         </form>
       </dialog>
+
+      <dialog id="addTodoDialog">
+        <h2>Add new task</h2>
+        <form>
+          <input type="text" id="todoTitle" name="todoTitle" placeholder="title">
+          <input type="text" id="todoDescription" name="todoDescription" placeholder="description">
+          <input type="datetime" id="todoDueDate" name="todoDueDate">
+          <select id="todoPriority" name="todoPriority">
+            <option value="high">Low</option>
+            <option value="high">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <textarea id="todoNotes" name="todoNotes" placeholder="extra notes"></textarea>
+          <!-- <input type="checkbox" id="todoComplete" name="todoComplete"> -->
+           <div>
+            <button type="button" id="btnTodoCreate">Create</button>
+            <button type="button" id="btnTodoClose">Cancel</button>
+           </div>
+        </form>
+      </dialog>
     </div>
     <h2>Projects</h2>
     <div class="projects-container">

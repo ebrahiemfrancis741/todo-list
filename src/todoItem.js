@@ -2,15 +2,15 @@
 
 class TodoItem{
   #title;
-  #description;
+  // #description;
   #dueDate;
   #priority;
   #notes;
   #complete;
 
-  constructor(title, description, dueDate, priority, notes, complete){
+  constructor(title, dueDate, priority, notes, complete){
     this.#title = title;
-    this.#description = description;
+    // this.#description = description;
     this.#dueDate = dueDate; // date object?
     this.#priority = priority;
     this.#notes = notes;
@@ -20,7 +20,7 @@ class TodoItem{
   toJSON(){
     return {
       title: this.#title,
-      todoList: this.#description,
+      // todoList: this.#description,
       dueDate: this.dueDate,
       priority: this.#priority,
       notes: this.#notes,
@@ -32,9 +32,9 @@ class TodoItem{
     return this.#title;
   }
   
-  get description(){
-    return this.#description;
-  }
+  // get description(){
+  //   return this.#description;
+  // }
 
   get dueDate(){
     return this.#dueDate;
@@ -56,9 +56,9 @@ class TodoItem{
     this.#title = title;
   }
 
-  set description(description){
-    this.#description = description;
-  }
+  // set description(description){
+  //   this.#description = description;
+  // }
 
   set dueDate(dueDate){
     this.#dueDate = dueDate;

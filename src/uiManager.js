@@ -60,6 +60,8 @@ function displayProjects(){
     const value = localStorage.getItem(key);
 
     projectObj = JSON.parse(`${value}`);
+    console.log("adding project:");
+    console.log(projectObj);
     addProjectToContainer(projectObj);
 }
 
@@ -68,7 +70,7 @@ function displayProjects(){
 function addProjectToContainer(projectObj){
   let body = document.querySelector("body");
   let projectsContainer = document.querySelector(".projects-container");
-  let project, projectToDoList, projectTitle;
+  let project, projectToDoList, projectTitle, todoItem;
 
   project = document.createElement("div");
   project.classList.add("project");
@@ -79,15 +81,14 @@ function addProjectToContainer(projectObj){
   projectTitle.textContent = projectObj.title;
   project.appendChild(projectTitle);
 
-  projectToDoList = document.createElement("div");
-  projectToDoList.classList.add("project-todo-list");
-  project.appendChild(projectToDoList);
+  
 
   //add btn that shows a dialog for creating a todo item
   let btnAddTodo = document.createElement("button");
   btnAddTodo.id = projectObj.title;
   btnAddTodo.textContent = "Add a task";
   btnAddTodo.classList.add(".add-todo");
+  project.appendChild(btnAddTodo);
 
   btnAddTodo.addEventListener("click", (e)=>{
     // store which project is selected in appState
@@ -99,7 +100,49 @@ function addProjectToContainer(projectObj){
     addTodoDialog.showModal();
   });
 
-  projectToDoList.appendChild(btnAddTodo);
+  projectToDoList = document.createElement("div");
+  projectToDoList.classList.add("project-todo-list");
+  project.appendChild(projectToDoList);
+
+  
+
+  // add todoItems to projectTodoList
+  for(let i = 0; i < projectObj.todoList.length; i++){
+    console.log(projectObj.todoList[i]);
+    // add todoItem to todo list section of the project ui
+    todoItem = document.createElement("div");
+    todoItem.classList.add("todo");
+    projectToDoList.appendChild(todoItem);
+
+    // add all the information to todoItem container element
+    let todoTitle = document.createElement("p");
+    todoTitle.textContent = projectObj.todoList[i].title;
+    todoItem.appendChild(todoTitle);
+
+    let todoDueDate = document.createElement("p");
+    todoDueDate.textContent = projectObj.todoList[i].dueDate;
+    todoItem.appendChild(todoDueDate);
+
+    let todoPriority = document.createElement("p");
+    todoPriority.textContent = `priority: ${projectObj.todoList[i].priority}`;
+    todoItem.appendChild(todoPriority);
+
+    let todoCompleteContainer = document.createElement("div");
+    todoCompleteContainer.classList.add("todo-complete-container");
+    todoItem.appendChild(todoCompleteContainer);
+
+
+    let todoComplete = document.createElement("input");
+    todoComplete.value = projectObj.title + "---" + projectObj.todoList[i].title;
+    todoComplete.textContent = projectObj.todoList[i].complete;
+    todoComplete.type = "checkbox";
+    todoCompleteContainer.appendChild(todoComplete);
+
+    let todoCompleteLabel = document.createElement("label");
+    todoCompleteLabel.textContent = "Complete";
+    todoCompleteContainer.appendChild(todoCompleteLabel);
+
+  }
 }
 
 // function btnAddTodoEventHandler(projectObj){
@@ -113,7 +156,7 @@ function btnTodoCreateEventHandler(){
 
   btnTodoCreate.addEventListener("click", (e)=>{
     let todoTitle = document.querySelector("#todoTitle");
-    let todoDescription = document.querySelector("#todoDescription");
+    // let todoDescription = document.querySelector("#todoDescription");
     let todoDueDate = document.querySelector("#todoDueDate");
     console.log(todoDueDate.value);
     let todoPriority = document.querySelector("#todoPriority");
@@ -121,8 +164,8 @@ function btnTodoCreateEventHandler(){
     let project = appState.project;
     console.log(project);
     let todoItem = new TodoItem(
-      todoTitle.value, todoDescription.value, todoDueDate.value,
-      todoPriority.value, todoNotes.value
+      todoTitle.value, todoDueDate.value,
+      todoPriority.value, todoNotes.value, false
     );
     project.todoList.push(todoItem);
     localStorage.setItem(project.title, JSON.stringify(project));
@@ -141,5 +184,9 @@ function btnTodoCloseEventHandler(){
     body.classList.toggle("dialog-open");
   });
 }
+
+// function addTodoToProject(){
+  
+// }
 
 export {setupEventHandlers, displayProjects};

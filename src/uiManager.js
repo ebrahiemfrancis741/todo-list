@@ -134,9 +134,19 @@ function addProjectToContainer(projectObj){
 
     let todoComplete = document.createElement("input");
     todoComplete.value = projectObj.title + "---" + projectObj.todoList[i].title;
+
+    // set custom attribute for checkbox elements to identify which todoList it belongs to
+    // store JSON of the project and todoItem 
+    // todoComplete.setAttribute("project", JSON.stringify(projectObj));
+    // todoComplete.setAttribute("todoItem", JSON.stringify(projectObj.todoList[i]));
+
     todoComplete.textContent = projectObj.todoList[i].complete;
     todoComplete.type = "checkbox";
     todoCompleteContainer.appendChild(todoComplete);
+    todoComplete.addEventListener("click", (e)=>{
+      projectObj.todoList[i].complete = e.target.checked;
+      console.log(projectObj.todoList[i]);
+    });
 
     let todoCompleteLabel = document.createElement("label");
     todoCompleteLabel.textContent = "Complete";
@@ -144,10 +154,6 @@ function addProjectToContainer(projectObj){
 
   }
 }
-
-// function btnAddTodoEventHandler(projectObj){
-
-// }
 
 function btnTodoCreateEventHandler(){
   let body = document.querySelector("body");
@@ -184,9 +190,5 @@ function btnTodoCloseEventHandler(){
     body.classList.toggle("dialog-open");
   });
 }
-
-// function addTodoToProject(){
-  
-// }
 
 export {setupEventHandlers, displayProjects};

@@ -5,4 +5,8 @@ function generateId(){
   return id;
 }
 
-export {generateId};
+function generateProjectId(){
+  return "project-" + generateId();
+}
+
+export {generateProjectId};

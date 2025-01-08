@@ -1,7 +1,7 @@
 // groups related tasks together
 function createProject(title) {
   return {
-    title,
+    title
   };
 }
 

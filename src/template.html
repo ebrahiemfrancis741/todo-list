@@ -3,62 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To do list</title>
+  <title>Todo list</title>
 </head>
 <body>
-  <header>
-    <h1>Todo List</h1>
-  </header>
-  <main>
-    <div class="dialog-container">
-      <dialog id="addProjectDialog">
-        <h2>Add new Project</h2>
-        <form>
-          <input type="text" id="projectTitle" placeholder="title" name="projectTitle">
-          <div>
-            <button type="button" id="btnProjectCreate">Create</button>
-            <button type="button" id="btnProjectClose">Cancel</button>
-          </div>
-        </form>
-      </dialog>
-
-      <dialog id="addTodoDialog">
-        <h2>Add new task</h2>
-        <form>
-          <input type="text" id="todoTitle" name="todoTitle" placeholder="title">
-          <!-- <input type="text" id="todoDescription" name="todoDescription" placeholder="description"> -->
-          <input type="datetime-local" id="todoDueDate" name="todoDueDate">
-          <div class="priority-container">
-            <label for="todoPriority">Priority</label>
-            <select id="todoPriority" name="todoPriority">
-              <option value="high">Low</option>
-              <option value="high">Medium</option>
-              <option value="high">High</option>
-            </select>
-          </div>
-          <textarea rows="10" id="todoNotes" name="todoNotes" placeholder="extra notes"></textarea>
-          <!-- <input type="checkbox" id="todoComplete" name="todoComplete"> -->
-           <div>
-            <button type="button" id="btnTodoCreate">Create</button>
-            <button type="button" id="btnTodoClose">Cancel</button>
-           </div>
-        </form>
-      </dialog>
-    </div>
-    <h2>Projects</h2>
-    <div class="projects-container">
-      <!-- <div class="project">
-        <h3>Project Title</h3>
-        <div class="project-todo-list">
-          <div class="todo">
-
-          </div>
-        </div>
-      </div> -->
-      <button class="add-project-btn">
-        <img src="./icons/add.svg">
-      </button>
-    </div>
-  </main>
+  
 </body>
 </html>

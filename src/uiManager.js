@@ -1,6 +1,6 @@
 // handles all UI functionality
-import { appState } from "./appState";
-import { saveProjectToStorage } from "./storage";
+import { appState, removeProjectFromAppState } from "./appState";
+import { saveProjectToStorage, removeProjectFromLocalStorage } from "./storage";
 import { createProject } from "./todoList";
 
 function setupEventHandlers() {
@@ -38,12 +38,13 @@ function btnProjectCancelEventHandler() {
   });
 }
 
-function renderProject(project) {
+function renderProject(id, project) {
   let projectContainer = document.querySelector(".project-container");
   let projectElement = document.createElement("div");
 
   // every .project element will be in the .project-container element
   projectElement.classList.add("project");
+  projectElement.setAttribute("project-id", id);
   projectContainer.appendChild(projectElement);
 
   // add all html elements thats needed to projectElement
@@ -54,16 +55,22 @@ function renderProject(project) {
   // add buttons to projectElement
   let projectBtnRemove = document.createElement("button");
   projectBtnRemove.textContent = "delete";
-  projectBtnRemove.addEventListener("click", function(e){
-
+  projectBtnRemove.setAttribute("project-id", id);
+  projectBtnRemove.addEventListener("click", function (e) {
+    removeProject(projectElement, id);
   });
   projectElement.appendChild(projectBtnRemove);
-  
+}
+
+function removeProject(projectElement, id) {
+  removeProjectFromAppState(id);
+  removeProjectFromLocalStorage(id);
+  projectElement.remove();
 }
 
 function renderAllProjects() {
-  for(const i in appState.projects){
-    renderProject(appState.projects[i]);
+  for (const i in appState.projects) {
+    renderProject(i, appState.projects[i]);
   }
 }
 

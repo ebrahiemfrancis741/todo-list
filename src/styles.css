@@ -1,14 +1,11 @@
-body{
+body {
   background-color: rgb(182, 182, 182);
 }
 
-main{
-
-  >div.main-content-container{
-
-    >div.project-container{
-
-      >div.project{
+main {
+  > div.main-content-container {
+    > div.project-container {
+      > div.project {
         border: 1px solid black;
       }
     }

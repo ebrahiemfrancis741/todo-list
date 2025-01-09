@@ -6,4 +6,3 @@ import { appState } from "./appState";
 loadProjectsIntoAppState();
 setupEventHandlers();
 renderAllProjects();
-console.log(appState);

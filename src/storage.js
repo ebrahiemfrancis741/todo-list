@@ -29,4 +29,12 @@ function loadProjectsIntoAppState() {
   appState.projects = getProjectsFromStorage();
 }
 
-export { saveProjectToStorage, loadProjectsIntoAppState };
+function removeProjectFromLocalStorage(id) {
+  localStorage.removeItem(id);
+}
+
+export {
+  saveProjectToStorage,
+  loadProjectsIntoAppState,
+  removeProjectFromLocalStorage,
+};

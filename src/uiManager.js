@@ -40,6 +40,7 @@ function btnProjectConfirmEventHandler() {
     if (appState.isEditingProject) {
       saveEditedProjectToAppState(appState.editProjectID, editedProject);
       saveEditedProjectToStorage(appState.editProjectID, editedProject);
+      updateProjectRender(appState.editProjectID);
       // reset app state
       appState.editProjectID = null;
       appState.editProjectRef = null;
@@ -84,6 +85,7 @@ function renderProject(id, project) {
   // add all html elements thats needed to projectElement
   let projectTitle = document.createElement("p");
   projectTitle.textContent = project.title;
+  projectTitle.setAttribute("project-id", id);
   projectElement.appendChild(projectTitle);
 
   // add buttons to projectElement
@@ -118,6 +120,12 @@ function removeProject(projectElement, id) {
   removeProjectFromAppState(id);
   removeProjectFromLocalStorage(id);
   projectElement.remove();
+}
+
+// updates the values in a project element
+function updateProjectRender(projectId) {
+  let projectTitle = document.querySelector(`p[project-id="${projectId}"]`);
+  projectTitle.textContent = appState.editProjectRef.title;
 }
 
 function renderAllProjects() {

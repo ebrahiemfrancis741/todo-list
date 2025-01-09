@@ -62,7 +62,7 @@ function renderProject(project) {
 }
 
 function renderAllProjects() {
-  for(let i = 0; i < appState.projects.length; i++){
+  for(const i in appState.projects){
     renderProject(appState.projects[i]);
   }
 }

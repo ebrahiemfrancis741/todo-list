@@ -1,5 +1,5 @@
 const appState = {
-  projects: [],
+  projects: {},
 };
 
 export { appState };

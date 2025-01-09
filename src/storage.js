@@ -11,14 +11,14 @@ function saveProjectToStorage(project) {
 
 // gets all projects from localStorage and return as an array
 function getProjectsFromStorage() {
-  const projects = [];
+  const projects = {};
   let projectObj;
   let id;
   for (let i = 0; i < localStorage.length; i++) {
     id = localStorage.key(i);
     if (id.startsWith("project-")) {
       projectObj = JSON.parse(localStorage.getItem(id));
-      projects.push(projectObj);
+      projects[id] = projectObj;
     }
   }
   return projects;

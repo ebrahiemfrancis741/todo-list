@@ -7,6 +7,11 @@ function saveProjectToStorage(project) {
   const projectId = generateProjectId();
   const stringObj = JSON.stringify(project);
   localStorage.setItem(projectId, stringObj);
+  return projectId;
+}
+
+function saveProjectToAppState(id, project) {
+  appState.projects[id] = project;
 }
 
 // gets all projects from localStorage and return as an array
@@ -37,4 +42,5 @@ export {
   saveProjectToStorage,
   loadProjectsIntoAppState,
   removeProjectFromLocalStorage,
+  saveProjectToAppState,
 };

@@ -1,6 +1,10 @@
 // handles all UI functionality
 import { appState, removeProjectFromAppState } from "./appState";
-import { saveProjectToStorage, removeProjectFromLocalStorage } from "./storage";
+import {
+  saveProjectToStorage,
+  removeProjectFromLocalStorage,
+  saveProjectToAppState,
+} from "./storage";
 import { createProject } from "./todoList";
 
 function setupEventHandlers() {
@@ -21,11 +25,16 @@ function btnOpenDialogProjectEventHandler() {
 function btnProjectConfirmEventHandler() {
   let btnProjectConfirm = document.querySelector("#btn-project-confirm");
   let textProjectTitle = document.querySelector("#text-project-title");
+  let dialogProject = document.querySelector("#dialog-project");
 
   btnProjectConfirm.addEventListener("click", function (e) {
     e.preventDefault();
     let newProject = createProject(textProjectTitle.value);
-    saveProjectToStorage(newProject);
+    let projectId = saveProjectToStorage(newProject);
+    saveProjectToAppState(projectId, newProject);
+    renderProject(projectId, newProject);
+    console.log(appState);
+    dialogProject.close();
   });
 }
 
@@ -62,6 +71,7 @@ function renderProject(id, project) {
   projectElement.appendChild(projectBtnRemove);
 }
 
+// removes the project from localStorage, appState.projects and the DOM
 function removeProject(projectElement, id) {
   removeProjectFromAppState(id);
   removeProjectFromLocalStorage(id);
@@ -69,6 +79,10 @@ function removeProject(projectElement, id) {
 }
 
 function renderAllProjects() {
+  // empty the container before adding new elements
+  let projectContainer = document.querySelector(".project-container");
+  projectContainer.replaceChildren();
+
   for (const i in appState.projects) {
     renderProject(i, appState.projects[i]);
   }

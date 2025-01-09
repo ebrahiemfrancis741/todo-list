@@ -4,10 +4,31 @@ body {
 
 main {
   > div.main-content-container {
+    display: grid;
+    margin-top: 16px;
+    grid-template-columns: 1fr 4fr;
+    border: 1px solid black;
+    padding: 8px;
+    column-gap: 16px;
+
+    > h2 {
+      text-align: center;
+    }
+
     > div.project-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       > div.project {
         border: 1px solid black;
+        border-radius: 4px;
+        padding: 8px;
       }
+    }
+
+    > div.project-tasks-container {
+      background-color: rgb(212, 212, 212);
+      border-radius: 4px;
     }
   }
 }

@@ -16,6 +16,7 @@ function setupEventHandlers() {
   btnProjectConfirmEventHandler();
   btnOpenDialogProjectEventHandler();
   btnProjectCancelEventHandler();
+  btnTaskCancelEventHandler();
 }
 
 function btnOpenDialogProjectEventHandler() {
@@ -76,6 +77,7 @@ function renderProject(id, project) {
   let projectElement = document.createElement("div");
   let dialogProject = document.querySelector("#dialog-project");
   let dialogProjectHeader = document.querySelector(".dialog-project-header");
+  let dialogTask = document.querySelector("#dialog-task");
 
   // every .project element will be in the .project-container element
   projectElement.classList.add("project");
@@ -113,6 +115,15 @@ function renderProject(id, project) {
     dialogProject.showModal();
   });
   projectElement.appendChild(projectBtnEdit);
+
+  // add an 'add task' button that adds tasks associated with this project
+  let projectBtnAddTask = document.createElement("button");
+  projectBtnAddTask.textContent = "Add task";
+  projectBtnAddTask.setAttribute("project-id", id);
+  projectBtnAddTask.addEventListener("click", function (e) {
+    dialogTask.showModal();
+  });
+  projectElement.appendChild(projectBtnAddTask);
 }
 
 // removes the project from localStorage, appState.projects and the DOM
@@ -136,6 +147,14 @@ function renderAllProjects() {
   for (const i in appState.projects) {
     renderProject(i, appState.projects[i]);
   }
+}
+
+function btnTaskCancelEventHandler(){
+  let dialogTask = document.querySelector("#");
+  let btnTaskCancel = document.querySelector("#btn-task-cancel");
+  btnTaskCancel.addEventListener("click", function(e){
+    dialogTask.close();
+  });
 }
 
 export { setupEventHandlers, renderAllProjects };

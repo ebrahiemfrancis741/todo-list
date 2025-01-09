@@ -10,6 +10,10 @@ function saveProjectToStorage(project) {
   return projectId;
 }
 
+function saveEditedProjectToStorage(id, project) {
+  localStorage.setItem(id, JSON.stringify(project));
+}
+
 function saveProjectToAppState(id, project) {
   appState.projects[id] = project;
 }
@@ -43,4 +47,5 @@ export {
   loadProjectsIntoAppState,
   removeProjectFromLocalStorage,
   saveProjectToAppState,
+  saveEditedProjectToStorage,
 };

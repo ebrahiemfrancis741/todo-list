@@ -50,6 +50,15 @@ function renderProject(project) {
   let projectTitle = document.createElement("p");
   projectTitle.textContent = project.title;
   projectElement.appendChild(projectTitle);
+
+  // add buttons to projectElement
+  let projectBtnRemove = document.createElement("button");
+  projectBtnRemove.textContent = "delete";
+  projectBtnRemove.addEventListener("click", function(e){
+
+  });
+  projectElement.appendChild(projectBtnRemove);
+  
 }
 
 function renderAllProjects() {

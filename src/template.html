@@ -23,6 +23,22 @@
             <button type="button" id="btn-project-cancel">Cancel</button>
           </form>
         </dialog>
+
+        <dialog id="dialog-task">
+          <h2 class="dialog-task-header">Task Details</h2>
+          <form>
+            <input type="text" id="text-task-title" placeholder="Task title" />
+            <textarea id="textarea-task-description" rows="20"></textarea>
+            <input type="datetime-local" id="date-task-dueDate" />
+            <select id="select-task-priority">
+              <option>low</option>
+              <option>medium</option>
+              <option>high</option>
+            </select>
+            <button type="button" id="btn-task-confirm">Confirm</button>
+            <button type="button" id="btn-task-cancel">Cancel</button>
+          </form>
+        </dialog>
       </div>
       <p>
         Welcome! To get started, create a 'project', which is simply a container

@@ -1,22 +1,22 @@
 // groups related tasks together
 function createProject(title) {
   return {
-    title
+    title,
   };
 }
 
 // represents a single task
 function createTask(
   title = "New Task",
+  description = "undefined",
   dueDate = "undefined",
-  priority = "low",
-  notes = "undefined"
+  priority = "low"
 ) {
   return {
     title,
+    description,
     dueDate,
     priority,
-    notes,
     complete: false,
   };
 }

@@ -9,4 +9,8 @@ function generateProjectId() {
   return "project-" + generateId();
 }
 
-export { generateProjectId };
+function generateTaskId(){
+  return "task-" + generateId();
+}
+
+export { generateProjectId, generateTaskId };

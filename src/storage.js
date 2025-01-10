@@ -29,6 +29,20 @@ function getProjectsFromStorage() {
   return projects;
 }
 
+function getTasksFromStorage() {
+  const tasks = {};
+  let taskObj;
+  let id;
+  for (let i = 0; i < localStorage.length; i++) {
+    id = localStorage.key(i);
+    if (id.includes("task-")) {
+      taskObj = JSON.parse(localStorage.getItem(id));
+      tasks[id] = taskObj;
+    }
+  }
+  return tasks;
+}
+
 function removeProjectFromLocalStorage(id) {
   localStorage.removeItem(id);
 }
@@ -40,8 +54,6 @@ function saveTaskToStorage(projectId, task) {
   const stringObj = JSON.stringify(task);
   const combinedId = projectId + "#" + taskId;
   localStorage.setItem(combinedId, stringObj);
-  console.log(`saving to storage taskid: ${combinedId}`);
-  console.log(`saving to storage task: ${stringObj}`);
   return combinedId;
 }
 
@@ -51,4 +63,5 @@ export {
   saveEditedProjectToStorage,
   saveTaskToStorage,
   getProjectsFromStorage,
+  getTasksFromStorage,
 };

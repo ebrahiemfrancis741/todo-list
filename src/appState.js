@@ -1,4 +1,4 @@
-import { getProjectsFromStorage } from "./storage";
+import { getProjectsFromStorage, getTasksFromStorage } from "./storage";
 
 const appState = {
   projects: {},
@@ -29,10 +29,13 @@ function loadProjectsIntoAppState() {
   appState.projects = getProjectsFromStorage();
 }
 
+function loadTasksIntoAppState() {
+  appState.tasks = getTasksFromStorage();
+}
+
 // taskId: full taskId(projectid + "#" + taskid)
 function saveTaskToAppState(taskId, task) {
   appState.tasks[taskId] = task;
-  console.log(appState);
 }
 
 export {
@@ -42,4 +45,5 @@ export {
   saveTaskToAppState,
   loadProjectsIntoAppState,
   saveProjectToAppState,
+  loadTasksIntoAppState,
 };

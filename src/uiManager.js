@@ -150,7 +150,6 @@ function renderAllProjects() {
   projectContainer.replaceChildren();
 
   for (const i in appState.projects) {
-    console.log(appState);
     if (appState.projects.hasOwnProperty(i)) {
       renderProject(i, appState.projects[i]);
     }

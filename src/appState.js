@@ -11,7 +11,9 @@ const appState = {
   // the id of the project that we want to add a task to
   projectAddTaskId: null,
   isEditingTask: false,
+  // id of the task we tant to edit
   editTaskId: null,
+  // reference to the task object we want to edit
   editTaskRef: null,
 };
 

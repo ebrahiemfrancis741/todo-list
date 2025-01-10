@@ -1,5 +1,4 @@
 // handles localStorage functionality
-import { appState } from "./appState";
 import { generateProjectId, generateTaskId } from "./idGenerator";
 
 // json version of an object stored with its uuid in localStorage

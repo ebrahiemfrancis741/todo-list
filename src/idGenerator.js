@@ -9,7 +9,7 @@ function generateProjectId() {
   return "project-" + generateId();
 }
 
-function generateTaskId(){
+function generateTaskId() {
   return "task-" + generateId();
 }
 

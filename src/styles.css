@@ -1,5 +1,15 @@
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./fonts/OpenSans.ttf");
+}
+
 * {
   box-sizing: border-box;
+}
+
+:root{
+  font-family: "OpenSans";
 }
 
 body {

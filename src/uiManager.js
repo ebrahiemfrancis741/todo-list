@@ -44,9 +44,9 @@ function btnProjectConfirmEventHandler() {
   let dialogProject = document.querySelector("#dialog-project");
 
   btnProjectConfirm.addEventListener("click", function (e) {
-    let editedProject = appState.editProjectRef;
-    editedProject.title = textProjectTitle.value;
     if (appState.isEditingProject) {
+      let editedProject = appState.editProjectRef;
+      editedProject.title = textProjectTitle.value;
       saveEditedProjectToAppState(appState.editProjectID, editedProject);
       saveEditedProjectToStorage(appState.editProjectID, editedProject);
       updateProjectRender(appState.editProjectID);
@@ -59,7 +59,6 @@ function btnProjectConfirmEventHandler() {
       let projectId = saveProjectToStorage(newProject);
       saveProjectToAppState(projectId, newProject);
       renderProject(projectId, newProject);
-      console.log(appState);
     }
     dialogProject.close();
   });
@@ -117,8 +116,6 @@ function renderProject(id, project) {
     appState.editProjectID = id;
     appState.editProjectRef = appState.projects[appState.editProjectID];
     dialogProjectHeader.textContent = "Edit Project";
-    console.log("Editing a project:");
-    console.log(appState);
     populateProjectDialog();
     dialogProject.showModal();
   });
@@ -188,20 +185,6 @@ function btnTaskConfirmEventHandler() {
   let dateTaskDueDate = document.querySelector("#date-task-dueDate");
   let selectTaskPriority = document.querySelector("#select-task-priority");
 
-  // btnTaskConfirm.addEventListener("click", function (e) {
-  //   let newTask = createTask(
-  //     textTaskTitle.value,
-  //     textareaTaskDescription.value,
-  //     dateTaskDueDate.value,
-  //     selectTaskPriority.value,
-  //     false
-  //   );
-  //   let taskId = saveTaskToStorage(appState.projectAddTaskId, newTask);
-  //   // reset state
-  //   appState.projectAddTaskId = null;
-  //   saveTaskToAppState(taskId, newTask);
-  //   dialogTask.close();
-  // });
   btnTaskConfirm.addEventListener("click", function (e) {
     if (appState.isEditingTask) {
       let editedTask = appState.editTaskRef;
@@ -211,7 +194,7 @@ function btnTaskConfirmEventHandler() {
       editedTask.priority = selectTaskPriority.value;
       saveEditedTaskToAppState(appState.editTaskId, editedTask);
       saveEditedTaskToStorage(appState.editTaskId, editedTask);
-      // updateProjectRender(appState.editProjectID);
+      renderAllTasksFromProject(appState.editTaskId.split("#")[0]);
       // reset app state
       appState.editTaskId = null;
       appState.editTaskRef = null;

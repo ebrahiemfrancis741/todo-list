@@ -183,9 +183,50 @@ function btnTaskConfirmEventHandler() {
       false
     );
     let taskId = saveTaskToStorage(appState.projectAddTaskId, newTask);
+    // reset state
+    appState.projectAddTaskId = null;
     saveTaskToAppState(taskId, newTask);
     dialogTask.close();
   });
+}
+
+function renderTask(id, task) {
+  let projectTasksContainer = document.querySelector(
+    ".project-tasks-container"
+  );
+  let taskElement = document.createElement("div");
+  taskElement.classList.add("task");
+  projectTasksContainer.appendChild(taskElement);
+
+  let taskTitle = document.createElement("h3");
+  taskTitle.textContent = task.title;
+  taskTitle.setAttribute("task-id", id);
+  taskElement.appendChild(taskTitle);
+
+  let taskDescription = document.createElement("p");
+  taskDescription.textContent = task.description;
+  taskDescription.setAttribute("task-id", id);
+  taskElement.appendChild(taskDescription);
+
+  let taskDueDate = document.createElement("p");
+  taskDueDate.textContent = task.dueDate;
+  taskDueDate.setAttribute("task-id", id);
+  taskElement.appendChild(taskDueDate);
+
+  let taskPriority = document.createElement(p);
+  taskPriority.textContent = `Priority: ${task.priority}`;
+  taskPriority.setAttribute("task-id", id);
+  taskElement.appendChild(taskPriority);
+
+  let taskCompleteContainer = document.createElement("div");
+  taskElement.appendChild(taskCompleteContainer);
+  let taskCompleteCheckbox = document.createElement("input");
+  taskCompleteCheckbox.setAttribute("type", "checkbox");
+  taskCompleteCheckbox.setAttribute("task-id", id);
+  taskCompleteContainer.appendChild(taskCompleteCheckbox);
+  let taskCompleteLabel = document.createElement("label");
+  taskCompleteLabel.textContent = "Complete?"
+  taskCompleteContainer.appendChild(taskCompleteLabel);
 }
 
 export { setupEventHandlers, renderAllProjects };

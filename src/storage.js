@@ -61,6 +61,10 @@ function saveTaskToStorage(projectId, task) {
   return combinedId;
 }
 
+function saveEditedTaskToStorage(taskId, taskObj) {
+  localStorage.setItem(taskId, JSON.stringify(taskObj));
+}
+
 export {
   saveProjectToStorage,
   removeProjectFromLocalStorage,
@@ -69,4 +73,5 @@ export {
   getProjectsFromStorage,
   getTasksFromStorage,
   removeTaskFromLocalStorage,
+  saveEditedTaskToStorage,
 };

@@ -10,6 +10,9 @@ const appState = {
   editProjectRef: null,
   // the id of the project that we want to add a task to
   projectAddTaskId: null,
+  isEditingTask: false,
+  editTaskId: null,
+  editTaskRef: null,
 };
 
 function removeProjectFromAppState(id) {
@@ -59,6 +62,11 @@ function removeTaskFromAppState(id) {
   delete appState.tasks[id];
 }
 
+function saveEditedTaskToAppState(taskId, taskObj) {
+  appState.tasks[taskId] = taskObj;
+}
+
+
 export {
   appState,
   removeProjectFromAppState,
@@ -69,4 +77,5 @@ export {
   loadTasksIntoAppState,
   getAllTasksFromProject,
   removeTaskFromAppState,
+  saveEditedTaskToAppState,
 };

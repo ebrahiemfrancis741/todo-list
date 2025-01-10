@@ -7,6 +7,7 @@ import {
   saveProjectToAppState,
   getAllTasksFromProject,
   removeTaskFromAppState,
+  saveEditedTaskToAppState,
 } from "./appState";
 import {
   saveProjectToStorage,
@@ -14,6 +15,7 @@ import {
   saveEditedProjectToStorage,
   saveTaskToStorage,
   removeTaskFromLocalStorage,
+  saveEditedTaskToStorage,
 } from "./storage";
 import { createProject, createTask } from "./todoList";
 
@@ -186,18 +188,47 @@ function btnTaskConfirmEventHandler() {
   let dateTaskDueDate = document.querySelector("#date-task-dueDate");
   let selectTaskPriority = document.querySelector("#select-task-priority");
 
+  // btnTaskConfirm.addEventListener("click", function (e) {
+  //   let newTask = createTask(
+  //     textTaskTitle.value,
+  //     textareaTaskDescription.value,
+  //     dateTaskDueDate.value,
+  //     selectTaskPriority.value,
+  //     false
+  //   );
+  //   let taskId = saveTaskToStorage(appState.projectAddTaskId, newTask);
+  //   // reset state
+  //   appState.projectAddTaskId = null;
+  //   saveTaskToAppState(taskId, newTask);
+  //   dialogTask.close();
+  // });
   btnTaskConfirm.addEventListener("click", function (e) {
-    let newTask = createTask(
-      textTaskTitle.value,
-      textareaTaskDescription.value,
-      dateTaskDueDate.value,
-      selectTaskPriority.value,
-      false
-    );
-    let taskId = saveTaskToStorage(appState.projectAddTaskId, newTask);
-    // reset state
-    appState.projectAddTaskId = null;
-    saveTaskToAppState(taskId, newTask);
+    if (appState.isEditingTask) {
+      let editedTask = appState.editTaskRef;
+      editedTask.title = textTaskTitle.value;
+      editedTask.description = textareaTaskDescription.value;
+      editedTask.dueDate = dateTaskDueDate.value;
+      editedTask.priority = selectTaskPriority.value;
+      saveEditedTaskToAppState(appState.editTaskId, editedTask);
+      saveEditedTaskToStorage(appState.editTaskId, editedTask);
+      // updateProjectRender(appState.editProjectID);
+      // reset app state
+      appState.editTaskId = null;
+      appState.editTaskRef = null;
+      appState.isEditingTask = false;
+    } else {
+      let newTask = createTask(
+        textTaskTitle.value,
+        textareaTaskDescription.value,
+        dateTaskDueDate.value,
+        selectTaskPriority.value,
+        false
+      );
+      let taskId = saveTaskToStorage(appState.projectAddTaskId, newTask);
+      // reset state
+      appState.projectAddTaskId = null;
+      saveTaskToAppState(taskId, newTask);
+    }
     dialogTask.close();
   });
 }
@@ -231,7 +262,6 @@ function renderTask(id, task) {
   taskPriority.setAttribute("task-id", id);
   taskElement.appendChild(taskPriority);
 
-
   // checkbox and its label are in a div container
   let taskCompleteContainer = document.createElement("div");
   taskElement.appendChild(taskCompleteContainer);
@@ -246,13 +276,26 @@ function renderTask(id, task) {
   // add a remove task button
   let taskBtnRemove = document.createElement("button");
   taskBtnRemove.textContent = "Remove task";
-  taskBtnRemove.addEventListener("click", function(e){
+  taskBtnRemove.addEventListener("click", function (e) {
     removeTaskFromAppState(id);
     removeTaskFromLocalStorage(id);
     // get the project id from the task id by only getting the first half, which is the project id
     renderAllTasksFromProject(id.split("#")[0]);
   });
   taskElement.appendChild(taskBtnRemove);
+
+  // add an edit button
+  let taskBtnEdit = document.createElement("button");
+  taskBtnEdit.textContent = "Edit";
+  taskBtnEdit.addEventListener("click", function (e) {
+    let dialogTask = document.querySelector("#dialog-task");
+    appState.isEditingTask = true;
+    appState.editTaskId = id;
+    appState.editTaskRef = appState.tasks[appState.editTaskId];
+    populateTaskDialog();
+    dialogTask.showModal();
+  });
+  taskElement.appendChild(taskBtnEdit);
 }
 
 function renderAllTasksFromProject(projectId) {
@@ -264,6 +307,19 @@ function renderAllTasksFromProject(projectId) {
   for (let i = 0; i < tasks.length; i++) {
     renderTask(tasks[i].id, tasks[i].taskObj);
   }
+}
+
+function populateTaskDialog() {
+  let textTaskTitle = document.querySelector("#text-task-title");
+  textTaskTitle.value = appState.editTaskRef.title;
+  let textareaTaskDescription = document.querySelector(
+    "#textarea-task-description"
+  );
+  textareaTaskDescription.value = appState.editTaskRef.description;
+  let dateTaskDueDate = document.querySelector("#date-task-dueDate");
+  dateTaskDueDate.value = appState.editTaskRef.dueDate;
+  let selectTaskPriority = document.querySelector("#select-task-priority");
+  selectTaskPriority.vale = appState.editTaskRef.priority;
 }
 
 export { setupEventHandlers, renderAllProjects };

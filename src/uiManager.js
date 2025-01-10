@@ -4,11 +4,11 @@ import {
   removeProjectFromAppState,
   saveEditedProjectToAppState,
   saveTaskToAppState,
+  saveProjectToAppState,
 } from "./appState";
 import {
   saveProjectToStorage,
   removeProjectFromLocalStorage,
-  saveProjectToAppState,
   saveEditedProjectToStorage,
   saveTaskToStorage,
 } from "./storage";

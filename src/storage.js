@@ -14,10 +14,6 @@ function saveEditedProjectToStorage(id, project) {
   localStorage.setItem(id, JSON.stringify(project));
 }
 
-function saveProjectToAppState(id, project) {
-  appState.projects[id] = project;
-}
-
 // gets all projects from localStorage and return as an array
 function getProjectsFromStorage() {
   const projects = {};
@@ -25,17 +21,12 @@ function getProjectsFromStorage() {
   let id;
   for (let i = 0; i < localStorage.length; i++) {
     id = localStorage.key(i);
-    if (id.startsWith("project-") && !(id.includes("task-"))) {
+    if (id.startsWith("project-") && !id.includes("task-")) {
       projectObj = JSON.parse(localStorage.getItem(id));
       projects[id] = projectObj;
     }
   }
   return projects;
-}
-
-// this effectively syncs what projects are in localStorage to appState.projects
-function loadProjectsIntoAppState() {
-  appState.projects = getProjectsFromStorage();
 }
 
 function removeProjectFromLocalStorage(id) {
@@ -56,9 +47,8 @@ function saveTaskToStorage(projectId, task) {
 
 export {
   saveProjectToStorage,
-  loadProjectsIntoAppState,
   removeProjectFromLocalStorage,
-  saveProjectToAppState,
   saveEditedProjectToStorage,
   saveTaskToStorage,
+  getProjectsFromStorage,
 };

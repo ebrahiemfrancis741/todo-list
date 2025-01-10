@@ -1,6 +1,6 @@
 import "./styles.css";
-import { loadProjectsIntoAppState } from "./storage";
 import { renderAllProjects, setupEventHandlers } from "./uiManager";
+import { loadProjectsIntoAppState } from "./appState";
 
 loadProjectsIntoAppState();
 setupEventHandlers();

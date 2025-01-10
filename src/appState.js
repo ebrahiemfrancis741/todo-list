@@ -1,3 +1,5 @@
+import { getProjectsFromStorage } from "./storage";
+
 const appState = {
   projects: {},
   tasks: {},
@@ -18,6 +20,15 @@ function saveEditedProjectToAppState(id, project) {
   appState.projects[id] = project;
 }
 
+function saveProjectToAppState(id, project) {
+  appState.projects[id] = project;
+}
+
+// this effectively syncs what projects are in localStorage to appState.projects
+function loadProjectsIntoAppState() {
+  appState.projects = getProjectsFromStorage();
+}
+
 // taskId: full taskId(projectid + "#" + taskid)
 function saveTaskToAppState(taskId, task) {
   appState.tasks[taskId] = task;
@@ -29,4 +40,6 @@ export {
   removeProjectFromAppState,
   saveEditedProjectToAppState,
   saveTaskToAppState,
+  loadProjectsIntoAppState,
+  saveProjectToAppState,
 };

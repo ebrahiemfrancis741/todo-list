@@ -6,12 +6,14 @@ import {
   saveTaskToAppState,
   saveProjectToAppState,
   getAllTasksFromProject,
+  removeTaskFromAppState,
 } from "./appState";
 import {
   saveProjectToStorage,
   removeProjectFromLocalStorage,
   saveEditedProjectToStorage,
   saveTaskToStorage,
+  removeTaskFromLocalStorage,
 } from "./storage";
 import { createProject, createTask } from "./todoList";
 
@@ -229,6 +231,8 @@ function renderTask(id, task) {
   taskPriority.setAttribute("task-id", id);
   taskElement.appendChild(taskPriority);
 
+
+  // checkbox and its label are in a div container
   let taskCompleteContainer = document.createElement("div");
   taskElement.appendChild(taskCompleteContainer);
   let taskCompleteCheckbox = document.createElement("input");
@@ -236,8 +240,19 @@ function renderTask(id, task) {
   taskCompleteCheckbox.setAttribute("task-id", id);
   taskCompleteContainer.appendChild(taskCompleteCheckbox);
   let taskCompleteLabel = document.createElement("label");
-  taskCompleteLabel.textContent = "Complete?";
+  taskCompleteLabel.textContent = "Complete";
   taskCompleteContainer.appendChild(taskCompleteLabel);
+
+  // add a remove task button
+  let taskBtnRemove = document.createElement("button");
+  taskBtnRemove.textContent = "Remove task";
+  taskBtnRemove.addEventListener("click", function(e){
+    removeTaskFromAppState(id);
+    removeTaskFromLocalStorage(id);
+    // get the project id from the task id by only getting the first half, which is the project id
+    renderAllTasksFromProject(id.split("#")[0]);
+  });
+  taskElement.appendChild(taskBtnRemove);
 }
 
 function renderAllTasksFromProject(projectId) {

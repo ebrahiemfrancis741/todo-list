@@ -47,6 +47,10 @@ function removeProjectFromLocalStorage(id) {
   localStorage.removeItem(id);
 }
 
+function removeTaskFromLocalStorage(id) {
+  localStorage.removeItem(id);
+}
+
 // tasks are stored with their associated projects id and their own id
 // full taskId = projectId + "#task-" + taskId
 function saveTaskToStorage(projectId, task) {
@@ -64,4 +68,5 @@ export {
   saveTaskToStorage,
   getProjectsFromStorage,
   getTasksFromStorage,
+  removeTaskFromLocalStorage,
 };

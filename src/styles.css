@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: rgb(182, 182, 182);
 }
@@ -23,15 +27,26 @@ main {
         border: 1px solid black;
         border-radius: 4px;
         padding: 8px;
+
+        &:hover {
+          background-color: rgb(89, 101, 134);
+          border: 1px solid blue;
+        }
       }
     }
 
     > div.project-tasks-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
       background-color: rgb(212, 212, 212);
       border-radius: 4px;
-
-      > div.task{
+      padding: 8px;
+      > div.task {
         border: 1px solid black;
+        width: 300px;
+        padding: 8px;
+        border-radius: 4px;
       }
     }
   }

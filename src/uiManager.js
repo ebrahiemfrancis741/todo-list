@@ -5,6 +5,7 @@ import {
   saveEditedProjectToAppState,
   saveTaskToAppState,
   saveProjectToAppState,
+  getAllTasksFromProject,
 } from "./appState";
 import {
   saveProjectToStorage,
@@ -129,6 +130,15 @@ function renderProject(id, project) {
     dialogTask.showModal();
   });
   projectElement.appendChild(projectBtnAddTask);
+
+  // add a showTasks button
+  let projectBtnShowTasks = document.createElement("button");
+  projectBtnShowTasks.textContent = "Show tasks";
+  projectBtnShowTasks.setAttribute("project-id", id);
+  projectBtnShowTasks.addEventListener("click", function (e) {
+    renderAllTasksFromProject(id);
+  });
+  projectElement.appendChild(projectBtnShowTasks);
 }
 
 // removes the project from localStorage, appState.projects and the DOM
@@ -194,6 +204,7 @@ function renderTask(id, task) {
   let projectTasksContainer = document.querySelector(
     ".project-tasks-container"
   );
+
   let taskElement = document.createElement("div");
   taskElement.classList.add("task");
   projectTasksContainer.appendChild(taskElement);
@@ -213,7 +224,7 @@ function renderTask(id, task) {
   taskDueDate.setAttribute("task-id", id);
   taskElement.appendChild(taskDueDate);
 
-  let taskPriority = document.createElement(p);
+  let taskPriority = document.createElement("p");
   taskPriority.textContent = `Priority: ${task.priority}`;
   taskPriority.setAttribute("task-id", id);
   taskElement.appendChild(taskPriority);
@@ -225,8 +236,19 @@ function renderTask(id, task) {
   taskCompleteCheckbox.setAttribute("task-id", id);
   taskCompleteContainer.appendChild(taskCompleteCheckbox);
   let taskCompleteLabel = document.createElement("label");
-  taskCompleteLabel.textContent = "Complete?"
+  taskCompleteLabel.textContent = "Complete?";
   taskCompleteContainer.appendChild(taskCompleteLabel);
+}
+
+function renderAllTasksFromProject(projectId) {
+  let projectTasksContainer = document.querySelector(
+    ".project-tasks-container"
+  );
+  projectTasksContainer.replaceChildren();
+  let tasks = getAllTasksFromProject(projectId);
+  for (let i = 0; i < tasks.length; i++) {
+    renderTask(tasks[i].id, tasks[i].taskObj);
+  }
 }
 
 export { setupEventHandlers, renderAllProjects };

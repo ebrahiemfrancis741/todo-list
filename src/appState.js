@@ -38,6 +38,23 @@ function saveTaskToAppState(taskId, task) {
   appState.tasks[taskId] = task;
 }
 
+// returns an array of task objects associated with the project
+function getAllTasksFromProject(projectId){
+  let tasks = [];
+  for(const key in appState.tasks){
+    // make sure we are only working with keys from appState.tasks
+    if(appState.tasks.hasOwnProperty(key)){
+      let idWithObj = {};
+      if(key.startsWith(projectId) && key.includes("task-")){
+        idWithObj["id"] = key;
+        idWithObj["taskObj"] = appState.tasks[key];
+        tasks.push(idWithObj);
+      }
+    }
+  }
+  return tasks;
+}
+
 export {
   appState,
   removeProjectFromAppState,
@@ -46,4 +63,5 @@ export {
   loadProjectsIntoAppState,
   saveProjectToAppState,
   loadTasksIntoAppState,
+  getAllTasksFromProject
 };

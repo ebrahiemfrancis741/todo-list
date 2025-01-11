@@ -68,7 +68,6 @@ function saveEditedTaskToAppState(taskId, taskObj) {
   appState.tasks[taskId] = taskObj;
 }
 
-
 export {
   appState,
   removeProjectFromAppState,

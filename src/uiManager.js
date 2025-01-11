@@ -208,9 +208,10 @@ function btnTaskConfirmEventHandler() {
         false
       );
       let taskId = saveTaskToStorage(appState.projectAddTaskId, newTask);
+      saveTaskToAppState(taskId, newTask);
+      renderAllTasksFromProject(appState.projectAddTaskId);
       // reset state
       appState.projectAddTaskId = null;
-      saveTaskToAppState(taskId, newTask);
     }
     dialogTask.close();
   });
@@ -251,7 +252,7 @@ function renderTask(id, task) {
   let taskCompleteCheckbox = document.createElement("input");
   taskCompleteCheckbox.setAttribute("type", "checkbox");
   taskCompleteCheckbox.setAttribute("task-id", id);
-  taskCompleteCheckbox.addEventListener("click", function(e){
+  taskCompleteCheckbox.addEventListener("click", function (e) {
     appState.tasks[id].complete = taskCompleteCheckbox.checked;
 
     saveEditedTaskToStorage(id, appState.tasks[id]);

@@ -251,6 +251,11 @@ function renderTask(id, task) {
   let taskCompleteCheckbox = document.createElement("input");
   taskCompleteCheckbox.setAttribute("type", "checkbox");
   taskCompleteCheckbox.setAttribute("task-id", id);
+  taskCompleteCheckbox.addEventListener("click", function(e){
+    appState.tasks[id].complete = taskCompleteCheckbox.checked;
+
+    saveEditedTaskToStorage(id, appState.tasks[id]);
+  });
   taskCompleteContainer.appendChild(taskCompleteCheckbox);
   let taskCompleteLabel = document.createElement("label");
   taskCompleteLabel.textContent = "Complete";

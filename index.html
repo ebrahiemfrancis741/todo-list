@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo list</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <head>
+      <h1>Project Task Manager</h1>
+    </head>
+    <main>
+      <div id="dialog-container">
+        <dialog id="dialog-project">
+          <h2 class="dialog-project-header">Project Details</h2>
+          <form>
+            <input
+              type="text"
+              id="text-project-title"
+              placeholder="Project title"
+            />
+            <button type="button" id="btn-project-confirm">Confirm</button>
+            <button type="button" id="btn-project-cancel">Cancel</button>
+          </form>
+        </dialog>
+
+        <dialog id="dialog-task">
+          <h2 class="dialog-task-header">Task Details</h2>
+          <form>
+            <input type="text" id="text-task-title" placeholder="Task title" />
+            <textarea id="textarea-task-description" rows="20"></textarea>
+            <input type="datetime-local" id="date-task-dueDate" />
+            <select id="select-task-priority">
+              <option value="low">low</option>
+              <option value="medium">medium</option>
+              <option value="high">high</option>
+            </select>
+            <button type="button" id="btn-task-confirm">Confirm</button>
+            <button type="button" id="btn-task-cancel">Cancel</button>
+          </form>
+        </dialog>
+      </div>
+      <p>
+        Welcome! To get started, create a 'project', which is simply a container
+        for your tasks. Then proceed to add new tasks to your project (task
+        container)
+      </p>
+      <button id="btn-open-dialog-project" type="button">Add Project</button>
+      <div class="main-content-container">
+        <h2>Projects</h2>
+        <h2>Tasks</h2>
+        <div class="project-container"></div>
+        <div class="project-tasks-container"></div>
+      </div>
+    </main>
+  </body>
+</html>

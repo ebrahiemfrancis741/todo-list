@@ -8,6 +8,7 @@ import {
   getAllTasksFromProject,
   removeTaskFromAppState,
   saveEditedTaskToAppState,
+  removeAllProjectsTasksFromAppState,
 } from "./appState";
 import {
   saveProjectToStorage,
@@ -16,6 +17,7 @@ import {
   saveTaskToStorage,
   removeTaskFromLocalStorage,
   saveEditedTaskToStorage,
+  removeAllProjectsTasksFromStorage,
 } from "./storage";
 import { createProject, createTask } from "./todoList";
 
@@ -33,6 +35,7 @@ function btnOpenDialogProjectEventHandler() {
   let dialogProjectHeader = document.querySelector(".dialog-project-header");
 
   btnOpenDialogProject.addEventListener("click", function (e) {
+    clearProjectDialog();
     dialogProjectHeader.textContent = "Add Project";
     dialogProject.showModal();
   });
@@ -85,6 +88,9 @@ function renderProject(id, project) {
   let dialogProject = document.querySelector("#dialog-project");
   let dialogProjectHeader = document.querySelector(".dialog-project-header");
   let dialogTask = document.querySelector("#dialog-task");
+  let projectTasksContainer = document.querySelector(
+    ".project-tasks-container"
+  );
 
   // every .project element will be in the .project-container element
   projectElement.classList.add("project");
@@ -103,6 +109,9 @@ function renderProject(id, project) {
   projectBtnRemove.setAttribute("project-id", id);
   projectBtnRemove.addEventListener("click", function (e) {
     removeProject(projectElement, id);
+    removeAllProjectsTasksFromAppState(id);
+    removeAllProjectsTasksFromStorage(id);
+    projectTasksContainer.replaceChildren();
   });
   projectElement.appendChild(projectBtnRemove);
 
@@ -127,6 +136,7 @@ function renderProject(id, project) {
   projectBtnAddTask.setAttribute("project-id", id);
   projectBtnAddTask.addEventListener("click", function (e) {
     // save the id of the project that we want to add a task to
+    clearDialogInput();
     appState.projectAddTaskId = id;
     dialogTask.showModal();
   });
@@ -308,7 +318,26 @@ function populateTaskDialog() {
   let dateTaskDueDate = document.querySelector("#date-task-dueDate");
   dateTaskDueDate.value = appState.editTaskRef.dueDate;
   let selectTaskPriority = document.querySelector("#select-task-priority");
-  selectTaskPriority.vale = appState.editTaskRef.priority;
+  selectTaskPriority.value = appState.editTaskRef.priority;
 }
 
+function clearDialogInput() {
+  let dialogTask = document.querySelector("#dialog-task");
+  dialogTask.value = "";
+  let textTaskTitle = document.querySelector("#text-task-title");
+  textTaskTitle.value = "";
+  let textareaTaskDescription = document.querySelector(
+    "#textarea-task-description"
+  );
+  textareaTaskDescription.value = "";
+  let dateTaskDueDate = document.querySelector("#date-task-dueDate");
+  dateTaskDueDate.value = "";
+  let selectTaskPriority = document.querySelector("#select-task-priority");
+  selectTaskPriority.value = "low"
+}
+
+function clearProjectDialog() {
+  let textProjectTitle = document.querySelector("#text-project-title");
+  textProjectTitle.value = "";
+}
 export { setupEventHandlers, renderAllProjects };

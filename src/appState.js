@@ -68,6 +68,14 @@ function saveEditedTaskToAppState(taskId, taskObj) {
   appState.tasks[taskId] = taskObj;
 }
 
+function removeAllProjectsTasksFromAppState(projectId) {
+  for (const key in appState.tasks) {
+    if (key.includes(projectId)) {
+      delete appState.tasks[projectId];
+    }
+  }
+}
+
 export {
   appState,
   removeProjectFromAppState,
@@ -79,4 +87,5 @@ export {
   getAllTasksFromProject,
   removeTaskFromAppState,
   saveEditedTaskToAppState,
+  removeAllProjectsTasksFromAppState,
 };

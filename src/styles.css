@@ -41,6 +41,7 @@ main {
     > div.project-container {
       display: flex;
       flex-direction: column;
+      min-height: 500px;
       gap: 16px;
       > div.project {
         border: 1px solid black;

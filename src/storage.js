@@ -64,6 +64,18 @@ function saveEditedTaskToStorage(taskId, taskObj) {
   localStorage.setItem(taskId, JSON.stringify(taskObj));
 }
 
+function removeAllProjectsTasksFromStorage(projectId) {
+  let removeKeys = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i).startsWith(projectId)) {
+      removeKeys.push(localStorage.key(i));
+    }
+  }
+  for (let i = 0; i < removeKeys.length; i++) {
+    localStorage.removeItem(removeKeys[i]);
+  }
+}
+
 export {
   saveProjectToStorage,
   removeProjectFromLocalStorage,
@@ -73,4 +85,5 @@ export {
   getTasksFromStorage,
   removeTaskFromLocalStorage,
   saveEditedTaskToStorage,
+  removeAllProjectsTasksFromStorage,
 };
